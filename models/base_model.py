@@ -19,11 +19,14 @@ class BaseModel:
 
     def __str__(self):
         '''
-                Print class nam, id and dictionary info
+        Print class nam, id and dictionary info
         '''
-        print("[{}] ".format(self.__class__.__name__), end="")
-        print("({}) ".format(self.id), end="")
-        print("<{}>".format(self.__dict__))
+        base_str = ""
+        base_str += "[{}] ".format(self.__class__.__name__)
+        base_str += "({}) ".format(self.id)
+        base_str += "<{}>".format(self.__dict__)
+
+        return base_str
 
     def save(self):
         '''comments'''
