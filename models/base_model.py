@@ -20,14 +20,16 @@ class BaseModel:
 
         if kwargs is not None:
             for key in kwargs:
-                if key != "__class__":
-                    if key != "id":
-                        if key != "created_at":
-                            self.key = kwargs[key]
-                if key == "created_at":
-                    print("HERE YOU GO")
-                    print(kwargs[key])
-                    print("OVER")
+                if key != "__class__" and key != "id":
+
+                    if key == "created_at" or key == "updated at":
+                        print("HERE YOU GO")
+                        print(kwargs[key])
+                        print(type(datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')))
+                        print("OVER")
+
+                    else
+                        self.key = kwargs[key]
 
     def __str__(self):
         '''
