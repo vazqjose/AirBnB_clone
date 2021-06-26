@@ -4,6 +4,7 @@
 import uuid
 from datetime import datetime, timezone
 
+
 class BaseModel:
     '''comments'''
 
@@ -20,18 +21,12 @@ class BaseModel:
 
         if kwargs is not None:
             for key in kwargs:
-                if key != "__class__" and key != "id":
-
-                    if key == "created_at" or key == "updated at":
-                        print("HERE YOU GO_________________________________________________")
-                        print(kwargs[key])
-                        time = datetime.strptime(kwargs[key],'%Y-%m-%dT%H:%M:%S.%f')
-                        print(type(time))
-                        self.key = time;
-                        print("OVER_________________________________________")
-
-                    else:
-                        self.key = kwargs[key]
+                if key == "created_at" or key == "updated at":
+                    dt = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                    self.key = dt
+                else:
+                    if key != "__class__" and key != "id":
+                        setattr(self, key, kwargs[key])
 
     def __str__(self):
         '''
@@ -41,14 +36,14 @@ class BaseModel:
         base_str = ""
         base_str += "[{}] ".format(self.__class__.__name__)
         base_str += "({}) ".format(self.id)
-        base_str += "<{}>".format(self.__dict__)
+        base_str += "{}".format(self.__dict__)
 
         return base_str
 
     def save(self):
         '''comments'''
 
-        self.updated_at = datetime.now(timezone.utc).isoformat()
+        self.updated_at = datetime.now().isoformat()
 
     def to_dict(self):
         '''comments'''
