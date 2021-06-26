@@ -15,20 +15,22 @@ class BaseModel:
         '''
 
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now(timezone.utc).isoformat()
-        self.updated_at = datetime.now(timezone.utc).isoformat()
+        self.created_at = datetime.now().isoformat()
+        self.updated_at = datetime.now().isoformat()
 
         if kwargs is not None:
             for key in kwargs:
                 if key != "__class__" and key != "id":
 
                     if key == "created_at" or key == "updated at":
-                        print("HERE YOU GO")
+                        print("HERE YOU GO_________________________________________________")
                         print(kwargs[key])
-                        print(type(datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')))
-                        print("OVER")
+                        time = datetime.strptime(kwargs[key],'%Y-%m-%dT%H:%M:%S.%f')
+                        print(type(time))
+                        self.key = time;
+                        print("OVER_________________________________________")
 
-                    else
+                    else:
                         self.key = kwargs[key]
 
     def __str__(self):
