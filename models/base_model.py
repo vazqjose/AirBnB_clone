@@ -22,15 +22,8 @@ class BaseModel:
         if kwargs is not None:
             for key in kwargs:
                 if key == "created_at" or key == "updated at":
-                    print("start____________________________________")
-                    print("key ", key)
-                    print("kwargs[key] ", kwargs[key])
-                    print(type(kwargs[key]))
                     dt = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
-                    print("dt ", dt)
-                    print(type(dt))
-                    print("finished___________________________________")
-                    self.key = dt
+                    setattr(self, key, dt)
                 else:
                     if key != "__class__" and key != "id":
                         setattr(self, key, kwargs[key])
@@ -56,6 +49,7 @@ class BaseModel:
         '''comments'''
 
         new_copy = self.__dict__.copy()
+        new_copy['__class__'] = self.__class__.__name__
         new_copy['created_at'] = self.created_at
         new_copy['updated_at'] = self.updated_at
 
