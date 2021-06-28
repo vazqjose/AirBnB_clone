@@ -6,6 +6,7 @@ import uuid
 from datetime import datetime, timezone
 from models import storage
 
+
 class BaseModel:
     '''comments'''
 
@@ -44,13 +45,17 @@ class BaseModel:
         return base_str
 
     def save(self):
-        '''comments'''
+        '''
+        updates the public instance attribute updated_at with datetime.now
+        '''
 
         self.updated_at = datetime.now().isoformat()
         storage.save(self)
 
     def to_dict(self):
-        '''comments'''
+        '''
+        returns a copy of keys/values of __dict__
+        '''
 
         new_copy = self.__dict__.copy()
         new_copy['__class__'] = self.__class__.__name__
@@ -58,4 +63,3 @@ class BaseModel:
         new_copy['updated_at'] = self.updated_at
 
         return new_copy
-
