@@ -1,9 +1,10 @@
 #!/usr/bin/python3
 '''comments'''
 
+
 import uuid
 from datetime import datetime, timezone
-
+from models import storage
 
 class BaseModel:
     '''comments'''
@@ -27,6 +28,8 @@ class BaseModel:
                 else:
                     if key != "__class__" and key != "id":
                         setattr(self, key, kwargs[key])
+        else:
+            storage.new(self)
 
     def __str__(self):
         '''
@@ -44,6 +47,7 @@ class BaseModel:
         '''comments'''
 
         self.updated_at = datetime.now().isoformat()
+        storage.save(self)
 
     def to_dict(self):
         '''comments'''
