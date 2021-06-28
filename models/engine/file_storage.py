@@ -5,11 +5,11 @@
 import json
 
 
-class FileStorage:
+class FileStorage():
     '''comments'''
 
     __file_path = "file.json"
-    __objects = {}
+    __object = {}
 
     def all(self):
         '''commetns'''
@@ -18,13 +18,13 @@ class FileStorage:
     def new(self, obj):
         '''adds new key/value pair'''
         key = "{}.".format(obj.__class__.__name__)
-        key = "{}".format(obj.id)
-        self.__objects[key] = obj
+        key += "{}".format(obj.id)
+        self.__object[key] = obj
 
     def save(self):
         '''object to string'''
         with open(__file_path, 'w+') as jfile:
-            json.dump(obj, jfile)
+            json.dump(self.__object, jfile)
 
     def reload(self):
         '''string to object'''
