@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 '''comments'''
 
-
 import uuid
 from datetime import datetime, timezone
 from models import storage
+from models.engine.file_storage import FileStorage
 
 
 class BaseModel:
@@ -51,6 +51,7 @@ class BaseModel:
         '''
 
         self.updated_at = datetime.now()
+        storage.save(self)
 
     def to_dict(self):
         '''
