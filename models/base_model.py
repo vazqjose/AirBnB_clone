@@ -18,14 +18,13 @@ class BaseModel:
         '''
 
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.now().isoformat()
-        self.updated_at = datetime.now().isoformat()
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
         if kwargs is not None:
             for key in kwargs:
                 if key == "created_at" or key == "updated at":
                     dt = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
-                    
                     setattr(self, key, dt)
                 else:
                     if key != "__class__" and key != "id":
@@ -38,8 +37,8 @@ class BaseModel:
         Print class name, id and dictionary info
         '''
 
-        base_str = ""
-        base_str += "[{}] ".format(self.__class__.__name__)
+        #base_str = ""
+        base_str = "[{}] ".format(self.__class__.__name__)
         base_str += "({}) ".format(self.id)
         base_str += "{}".format(self.__dict__)
 
