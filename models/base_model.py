@@ -49,7 +49,7 @@ class BaseModel:
         updates the public instance attribute updated_at with datetime.now
         '''
 
-        self.updated_at = datetime.now().isoformat()
+        self.updated_at = datetime.now()
         storage.save(self)
 
     def to_dict(self):
@@ -59,7 +59,9 @@ class BaseModel:
 
         new_copy = self.__dict__.copy()
         new_copy['__class__'] = self.__class__.__name__
-        new_copy['created_at'] = self.created_at
-        new_copy['updated_at'] = self.updated_at
+
+        for key, val in new_copy():
+            if isinstance(val, (datetime)):
+                new_copy[key] = val.isoformat()
 
         return new_copy
