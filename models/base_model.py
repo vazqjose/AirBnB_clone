@@ -32,6 +32,8 @@ class BaseModel:
         else:
             storage.new(self)
 
+        storage.new(self)
+
 
     def __str__(self):
         '''
@@ -51,7 +53,7 @@ class BaseModel:
         '''
 
         self.updated_at = datetime.now()
-        storage.save(self)
+        storage.save()
 
     def to_dict(self):
         '''

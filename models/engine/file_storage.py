@@ -15,8 +15,8 @@ class FileStorage:
     def new(self, obj):
         '''comments'''
 
-        key = "{}.".format(self.__class__.__name__)
-        key += "{}".format(self.id)
+        key = "{}.".format(obj.__class__.__name__)
+        key += "{}".format(obj.id)
         self.__objects[key] = obj
 
     def save(self):

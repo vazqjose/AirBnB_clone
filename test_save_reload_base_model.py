@@ -2,6 +2,11 @@
 from models import storage
 from models.base_model import BaseModel
 
+my_number = BaseModel()
+my_number.name = "IT IS WORKING"
+my_number.save()
+print(my_number)
+
 all_objs = storage.all()
 print(all_objs)
 print("-- Reloaded objects --")
