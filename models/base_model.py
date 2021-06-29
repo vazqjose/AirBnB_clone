@@ -25,6 +25,7 @@ class BaseModel:
             for key in kwargs:
                 if key == "created_at" or key == "updated at":
                     dt = datetime.strptime(kwargs[key], '%Y-%m-%dT%H:%M:%S.%f')
+                    
                     setattr(self, key, dt)
                 else:
                     if key != "__class__" and key != "id":
@@ -60,7 +61,7 @@ class BaseModel:
         new_copy = self.__dict__.copy()
         new_copy['__class__'] = self.__class__.__name__
 
-        for key, val in new_copy():
+        for key, val in new_copy.items():
             if isinstance(val, (datetime)):
                 new_copy[key] = val.isoformat()
 
