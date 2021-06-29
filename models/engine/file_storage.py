@@ -2,6 +2,9 @@
 '''comments'''
 
 
+import json
+
+
 class FileStorage:
 
     __file_path = "file.json"
@@ -22,15 +25,15 @@ class FileStorage:
     def save(self):
         '''obj to json file'''
 
-        with open(__file_path, 'w+') as jfile:
-            json.dump(obj, jfile)
+        with open(self.__file_path, 'w+') as jfile:
+            json.dump(self.__objects, jfile)
 
     def reload(self):
         '''json string to obj'''
 
         try:
-            with open(__file_path, 'w+') as jfile:
-                json.load(fjile)
+            with open(self.__file_path) as jfile:
+                json.load(jfile)
 
         except:
             pass
