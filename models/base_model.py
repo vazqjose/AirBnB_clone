@@ -3,8 +3,7 @@
 
 import uuid
 from datetime import datetime, timezone
-from models import storage
-from models.engine.file_storage import FileStorage
+import models
 
 
 class BaseModel:
@@ -29,11 +28,6 @@ class BaseModel:
                 else:
                     if key != "__class__":
                         setattr(self, key, value)
-        else:
-            storage.new(self)
-
-        storage.new(self)
-
 
     def __str__(self):
         '''
@@ -53,7 +47,7 @@ class BaseModel:
         '''
 
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         '''
