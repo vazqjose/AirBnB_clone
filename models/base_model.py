@@ -34,7 +34,6 @@ class BaseModel:
         Print class name, id and dictionary info
         '''
 
-        #base_str = ""
         base_str = "[{}] ".format(self.__class__.__name__)
         base_str += "({}) ".format(self.id)
         base_str += "{}".format(self.__dict__)

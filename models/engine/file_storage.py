@@ -24,10 +24,9 @@ class FileStorage:
             key += "{}".format(obj.id)
             self.__objects[key] = obj
 
-
     def save(self):
         '''obj to json file'''
-        
+
         '''
         this print block is for debugging
         __objects is empty
@@ -47,7 +46,6 @@ class FileStorage:
         with open(self.__file_path, 'w') as jfile:
             json.dump(new_dict, jfile)
 
-
     def reload(self):
         '''json string to obj'''
 
@@ -57,4 +55,3 @@ class FileStorage:
 
         except:
             pass
-
