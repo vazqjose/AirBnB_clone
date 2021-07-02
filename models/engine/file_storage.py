@@ -38,7 +38,6 @@ class FileStorage:
 
         new_dict = {}
 
-        # its not entering through this loop
         for key, obj in self.__objects.items():
             new_dict[key] = obj.to_dict()
             print("{}.{}".format(key, obj))
