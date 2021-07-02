@@ -13,12 +13,10 @@ class FileStorage:
 
     def all(self):
         '''comments'''
-
         return self.__objects
 
     def new(self, obj):
         '''comments'''
-
         if obj:
             key = "{}.".format(obj.__class__.__name__)
             key += "{}".format(obj.id)
@@ -30,19 +28,9 @@ class FileStorage:
         this print block is for debugging
         __objects is empty
         '''
-        print("Info of __objects dictionary:")
-        print(type(self.__objects))
-        print(self.__objects)
-        print("---------------------------------")
-
-        new_dict = {}
-
-        for key, obj in self.__objects.items():
-            new_dict[key] = obj.to_dict()
-            print("{}.{}".format(key, obj))
 
         with open(self.__file_path, 'w') as jfile:
-            json.dump(new_dict, jfile)
+            json.dump(self.__file_path, jfile)
 
     def reload(self):
         '''json string to obj'''
