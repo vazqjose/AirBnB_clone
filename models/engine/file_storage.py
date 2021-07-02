@@ -26,7 +26,6 @@ class FileStorage:
 
     def save(self):
         '''obj to json file'''
-
         '''
         this print block is for debugging
         __objects is empty
