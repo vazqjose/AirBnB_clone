@@ -56,7 +56,15 @@ class FileStorage:
             json.dump(copy_objects_dict, j_file)
 
     def reload(self):
+        '''Desrializes the JSON file to __objects. If the file path does not
+        exists, no exceptions are raised.
         '''
-        '''
-        pass
+        try:
+            with open(self.__file_path, 'r+') as j_file:
+                new_dict = json.load(j_file)
+            for key, value in new_dict.items():
+                self.__objects[key] = value
+
+        except:
+            pass
 
