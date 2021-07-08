@@ -9,9 +9,16 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
-    '''unittests for our BaseModel class, testing:
-    __init__, __str__, to_dict, and the save methods from the class.
+    '''unittests for our BaseModel class, testing: __init__, __str__,
+    to_dict, attributes, and the save methods from the class.
     '''
+    def test_id(self):
+        '''Testing the id attribute from BaseModel to make sure it is
+        assigning a string.
+        '''
+        test_obj = BaseModel()
+        self.assertEqual(type(test_obj.id), str)
+
     def test_save(self):
         '''Testing the save method from BaseModel class, by creating
         an object, then making the program wait 1 second before calling
