@@ -4,6 +4,7 @@
 
 import unittest
 from time import sleep
+from datetime import datetime
 from models.base_model import BaseModel
 
 
@@ -23,6 +24,26 @@ class TestBaseModel(unittest.TestCase):
         test_obj.save()
         time_updated = test_obj.updated_at
         self.assertNotEqual(time_created, time_updated)
+
+    def test_to_dict(self):
+        '''Testing the to_dict method by creating a creating an object,
+        initializing the attributes to the values I want, creating a
+        dictionary that represents that to_dict called on that object
+        is supposed to return, and then actually calling the to_dict
+        method to see if it matches
+        '''
+        date = datetime.now()
+        test_obj = BaseModel()
+        test_obj.id = "1"
+        test_obj.created_at = date
+        test_obj.updated_at = date
+        test_dict = {
+                'id': '1',
+                '__class__': 'BaseModel',
+                'created_at': date.isoformat(),
+                'updated_at': date.isoformat(),
+                }
+        self.assertDictEqual(test_obj.to_dict(), test_dict)
 
 if __name__ == '__main__':
         unittest.main()
