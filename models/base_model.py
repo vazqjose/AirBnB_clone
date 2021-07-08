@@ -1,63 +1,23 @@
 #!/usr/bin/python3
-'''comments'''
+'''File defines the class Basemodel'''
 
-import uuid
-from datetime import datetime, timezone
-import models
+from uuis import uuid4
+'''Used to generate a random id for eac instance of the clas.'''
 
+class Basemodel:
+    '''Class defines all common attributes/methods for other classes.
+    Public instance attributes:
+        id: a string assigned an uuid when an instance is created
+        created_at: a datetime object assigned the current datetime when an instance is created
+        updated_at: a datetime object assigned the current datetime when an instance is created
+            and it will be updated every time the object is changed
+    Public instance methods:
+        save(self): updates the public instance attribute updated_at with the current datetime
+        to_dict(self): returns a dictionary containing all keys/values of __dict__ of the instance,
+            self.__dict__ only returns the attributes of the instance, so a key __class__ will be added 
+            to this dictionary paired with the class name of the object. created_at/updated_at will be 
+            converted to string objects in ISO format(format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)). 
+            This method will be the first piece of the serialization/deserialization process: It creates a 
+            dictionary representation with "simple object type" of our BaseModel
+    '''
 
-class BaseModel:
-    '''comments'''
-
-    def __init__(self, *args, **kwargs):
-        '''
-        id: assign with an uuid when an instance is created
-        created_at: current datetime when an instance is created
-        updated_at: current datetime when an instance is updated
-        '''
-
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-
-        if kwargs:
-            for key, value in kwargs.items():
-                if key == "created_at" or key == "updated at":
-                    dt = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
-                    setattr(self, key, dt)
-                else:
-                    if key != "__class__":
-                        setattr(self, key, value)
-
-    def __str__(self):
-        '''
-        Print class name, id and dictionary info
-        '''
-
-        base_str = "[{}] ".format(self.__class__.__name__)
-        base_str += "({}) ".format(self.id)
-        base_str += "{}".format(self.__dict__)
-
-        return base_str
-
-    def save(self):
-        '''
-        updates the public instance attribute updated_at with datetime.now
-        '''
-
-        self.updated_at = datetime.now()
-        models.storage.save()
-
-    def to_dict(self):
-        '''
-        returns a copy of keys/values of __dict__
-        '''
-
-        new_copy = self.__dict__.copy()
-        new_copy['__class__'] = self.__class__.__name__
-
-        for key, val in new_copy.items():
-            if isinstance(val, (datetime)):
-                new_copy[key] = val.isoformat()
-
-        return new_copy
