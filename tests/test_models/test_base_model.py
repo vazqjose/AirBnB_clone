@@ -19,6 +19,13 @@ class TestBaseModel(unittest.TestCase):
         test_obj = BaseModel()
         self.assertEqual(type(test_obj.id), str)
 
+    def test_created_at(self):
+        '''Testing the created_at attribute from BaseModel to make sure
+        it is assigning a datetime obj.
+        '''
+        test_obj = BaseModel()
+        self.assertEqual(type(test_obj.created_at), datetime)
+
     def test_save(self):
         '''Testing the save method from BaseModel class, by creating
         an object, then making the program wait 1 second before calling
