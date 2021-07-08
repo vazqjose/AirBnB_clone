@@ -27,7 +27,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(type(test_obj.created_at), datetime)
 
     def test_str(self):
-        '''Testing the __str__ method of BaseModel.
+        '''Testing the __str__ method of BaseModel, making sure all the attrs
+        that it's supposed to include in the return string, are there.
         '''
         test_obj = BaseModel()
         test_obj.id = "1"
