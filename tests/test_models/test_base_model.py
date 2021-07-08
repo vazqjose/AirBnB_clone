@@ -37,7 +37,19 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn("'created_at'", test_obj_str)
         self.assertIn("'updated_at'", test_obj_str)
 
-    def test_save(self):
+    def test_save_0(self):
+        '''Testing the save method from BaseModel class, by creating an
+        object, then calling the save() method on it, and seeing if the
+        second date is creater than then older one.
+        '''
+        test_obj = BaseModel()
+        created = test_obj.updated_at
+        sleep(2)
+        test_obj.save()
+        updated = test_obj.updated_at
+        self.assertLess(created, updated)
+
+    def test_save_1(self):
         '''Testing the save method from BaseModel class, by creating
         an object, then making the program wait 1 second before calling
         the save method from BaseModel and then comparing the created_at
@@ -45,7 +57,7 @@ class TestBaseModel(unittest.TestCase):
         '''
         test_obj = BaseModel()
         time_created = test_obj.created_at
-        sleep(1)
+        sleep(2)
         test_obj.save()
         time_updated = test_obj.updated_at
         self.assertNotEqual(time_created, time_updated)
