@@ -3,7 +3,7 @@
 
 import uuid
 from datetime import datetime
-
+import models
 
 class BaseModel:
     '''Class defines all common attributes/methods for other classes.
@@ -37,10 +37,6 @@ class BaseModel:
         updated_at: A datetime object assigned the current datetime when
             an instance is created, updated every time the object is changed.
         '''
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-
         if kwargs:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated at":
@@ -49,6 +45,11 @@ class BaseModel:
                 else:
                     if key != "__class__":
                         setattr(self, key, value)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+            models.storage.new(self)
 
     def __str__(self):
         '''Returns the str representation of the instance:
@@ -72,3 +73,4 @@ class BaseModel:
         '''Updates the public instance attribute updated_at to a new datetime object
         '''
         self.updated_at = datetime.now()
+        models.storage.save()
