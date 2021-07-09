@@ -48,7 +48,6 @@ class FileStorage:
         attrs into strings before we call the json.dumps method.
         '''
         copy_objects_dict = {}
-        print(self.__objects)
 
         for key, value in self.__objects.items():
             copy_objects_dict[key] = value.to_dict()
