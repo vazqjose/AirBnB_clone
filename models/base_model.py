@@ -39,7 +39,7 @@ class BaseModel:
         '''
         if kwargs:
             for key, value in kwargs.items():
-                if key == "created_at" or key == "updated at":
+                if key == "created_at" or key == "updated_at":
                     dt = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, dt)
                 else:
@@ -54,7 +54,7 @@ class BaseModel:
     def __str__(self):
         '''Returns the str representation of the instance:
             [<class name>] (<self.id>) <self.__dict__>'''
-        c_n = self.__class__.__name__
+        c_n = type(self).__name__
         return "[{}] ({}) {}".format(c_n, self.id, self.__dict__)
 
     def to_dict(self):
@@ -64,9 +64,9 @@ class BaseModel:
         ISO format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)
         '''
         new_dict_copy = self.__dict__.copy()
-        new_dict_copy['__class__'] = self.__class__.__name__
-        new_dict_copy['created_at'] = self.created_at.isoformat()
-        new_dict_copy['updated_at'] = self.updated_at.isoformat()
+        new_dict_copy['__class__'] = type(self).__name__
+        new_dict_copy['created_at'] = new_dict_copy['created_at'].isoformat()
+        new_dict_copy['updated_at'] = new_dict_copy['updated_at'].isoformat()
         return new_dict_copy
 
     def save(self):
