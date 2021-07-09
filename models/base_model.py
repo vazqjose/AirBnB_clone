@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
     '''Class defines all common attributes/methods for other classes.
     Public instance attributes:
@@ -54,7 +55,7 @@ class BaseModel:
     def __str__(self):
         '''Returns the str representation of the instance:
             [<class name>] (<self.id>) <self.__dict__>'''
-        c_n = type(self).__name__
+        c_n = self.__class__.__name__
         return "[{}] ({}) {}".format(c_n, self.id, self.__dict__)
 
     def to_dict(self):
@@ -64,9 +65,9 @@ class BaseModel:
         ISO format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)
         '''
         new_dict_copy = self.__dict__.copy()
-        new_dict_copy['__class__'] = type(self).__name__
-        new_dict_copy['created_at'] = new_dict_copy['created_at'].isoformat()
-        new_dict_copy['updated_at'] = new_dict_copy['updated_at'].isoformat()
+        new_dict_copy['__class__'] = self.__class__.__name__
+        new_dict_copy['created_at'] = self.created_at.isoformat()
+        new_dict_copy['updated_at'] = self.updated_at.isoformat()
         return new_dict_copy
 
     def save(self):
