@@ -48,9 +48,10 @@ class FileStorage:
         attrs into strings before we call the json.dumps method.
         '''
         copy_objects_dict = {}
+        print(self.__objects)
 
         for key, value in self.__objects.items():
-            copy_objects_dict = value.to_dict()
+            copy_objects_dict[key] = value.to_dict()
 
         with open(self.__file_path, 'w+') as j_file:
             json.dump(copy_objects_dict, j_file)
@@ -63,7 +64,9 @@ class FileStorage:
             with open(self.__file_path, 'r+') as j_file:
                 new_dict = json.load(j_file)
             for key, value in new_dict.items():
-                self.__objects[key] = value
+                classes = key.split(".")
+                '''assign the new value to the key'''
+                self.__objects[key] = eval(classes[0])(**value)
 
         except:
             pass

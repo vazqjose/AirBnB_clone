@@ -5,6 +5,7 @@ import uuid
 from datetime import datetime
 import models
 
+
 class BaseModel:
     '''Class defines all common attributes/methods for other classes.
     Public instance attributes:
@@ -39,7 +40,7 @@ class BaseModel:
         '''
         if kwargs:
             for key, value in kwargs.items():
-                if key == "created_at" or key == "updated at":
+                if key == "created_at" or key == "updated_at":
                     dt = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
                     setattr(self, key, dt)
                 else:
